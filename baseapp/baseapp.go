@@ -964,6 +964,11 @@ func (app *BaseApp) runTx(mode runTxMode, txBytes []byte, tx sdk.Tx) (result sdk
 	result = app.runMsgs(runMsgCtx, msgs, mode)
 	result.GasWanted = gasWanted
 
+	// call post deliver tx handler
+	if app.postDeliverTxHandler != nil {
+		app.postDeliverTxHandler(ctx, tx, result)
+	}
+
 	// Safety check: don't write the cache state unless we're in DeliverTx.
 	if mode != runTxModeDeliver {
 		return result
@@ -972,11 +977,6 @@ func (app *BaseApp) runTx(mode runTxMode, txBytes []byte, tx sdk.Tx) (result sdk
 	// only update state if all messages pass
 	if result.IsOK() {
 		msCache.Write()
-	}
-
-	// call post deliver tx handler
-	if app.postDeliverTxHandler != nil {
-		app.postDeliverTxHandler(ctx, tx, result)
 	}
 
 	return result
