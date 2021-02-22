@@ -24,9 +24,17 @@ var (
 
 	// param key for global account number
 	GlobalAccountNumberKey = []byte("globalAccountNumber")
+
+	// ProposerKeyPrefix prefix for proposer
+	ProposerKeyPrefix = []byte("proposer")
 )
 
 // AddressStoreKey turn an address to key used to get it from the account store
 func AddressStoreKey(addr sdk.AccAddress) []byte {
 	return append(AddressStoreKeyPrefix, addr.Bytes()...)
+}
+
+// ProposerKey returns proposer key
+func ProposerKey() []byte {
+	return ProposerKeyPrefix
 }

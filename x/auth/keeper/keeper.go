@@ -42,6 +42,15 @@ type AccountKeeperI interface {
 
 	// Fetch the next account number, and increment the internal counter.
 	GetNextAccountNumber(sdk.Context) uint64
+
+	// GetBlockProposer returns block proposer
+	GetBlockProposer(sdk.Context) (sdk.AccAddress, bool)
+
+	// SetBlockProposer sets block proposer
+	SetBlockProposer(ctx sdk.Context, addr sdk.AccAddress)
+
+	// RemoveBlockProposer removes block proposer from store
+	RemoveBlockProposer(ctx sdk.Context)
 }
 
 // AccountKeeper encodes/decodes accounts using the go-amino (binary)
@@ -235,3 +244,30 @@ func (ak AccountKeeper) UnmarshalAccount(bz []byte) (types.AccountI, error) {
 }
 
 func (ak AccountKeeper) GetCodec() codec.BinaryMarshaler { return ak.cdc }
+
+//
+// proposer
+//
+
+// GetBlockProposer returns block proposer
+func (ak AccountKeeper) GetBlockProposer(ctx sdk.Context) (sdk.AccAddress, bool) {
+	store := ctx.KVStore(ak.key)
+	if !store.Has(types.ProposerKey()) {
+		return sdk.AccAddress{}, false
+	}
+
+	bz := store.Get(types.ProposerKey())
+	return sdk.AccAddress(bz), true
+}
+
+// SetBlockProposer sets block proposer
+func (ak AccountKeeper) SetBlockProposer(ctx sdk.Context, addr sdk.AccAddress) {
+	store := ctx.KVStore(ak.key)
+	store.Set(types.ProposerKey(), addr.Bytes())
+}
+
+// RemoveBlockProposer removes block proposer from store
+func (ak AccountKeeper) RemoveBlockProposer(ctx sdk.Context) {
+	store := ctx.KVStore(ak.key)
+	store.Delete(types.ProposerKey())
+}
