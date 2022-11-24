@@ -311,6 +311,13 @@ func (app *BaseApp) setCheckState(header abci.Header) {
 	}
 }
 
+// IsPresent() checks whether the store corresponding to an input key
+// exist in a db
+func (app *BaseApp) IsPresent(key string) bool {
+	val := app.cms.IsPresent(key)
+	return val
+}
+
 // setCheckState sets checkState with the cached multistore and
 // the context wrapping it.
 // It is called by InitChain() and BeginBlock(),
@@ -763,7 +770,7 @@ func (app *BaseApp) getContextForTx(mode runTxMode, txBytes []byte) (ctx sdk.Con
 	return
 }
 
-/// runMsgs iterates through all the messages and executes them.
+// / runMsgs iterates through all the messages and executes them.
 func (app *BaseApp) runMsgs(ctx sdk.Context, msgs []sdk.Msg, mode runTxMode) (result sdk.Result) {
 	msgLogs := make(sdk.ABCIMessageLogs, 0, len(msgs))
 

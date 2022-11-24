@@ -149,6 +149,10 @@ func (kv kvStore) ReverseSubspaceIterator(prefix []byte) sdk.Iterator {
 	panic("not implemented")
 }
 
+func (ms multiStore) IsPresent(key string) bool {
+	return false
+}
+
 func NewCommitMultiStore() sdk.CommitMultiStore {
 	return multiStore{kv: make(map[sdk.StoreKey]kvStore)}
 }

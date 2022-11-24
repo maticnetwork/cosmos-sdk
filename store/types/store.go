@@ -99,6 +99,10 @@ type CommitMultiStore interface {
 	// must be idempotent (return the same commit id). Otherwise the behavior is
 	// undefined.
 	LoadVersion(ver int64) error
+
+	//IsPresent() will take the key and check whether the store corresponding to the
+	//key is present
+	IsPresent(key string) bool
 }
 
 //---------subsp-------------------------------

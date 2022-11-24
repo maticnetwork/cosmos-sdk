@@ -316,6 +316,26 @@ func (rs *Store) CacheMultiStoreWithVersion(version int64) (types.CacheMultiStor
 	return cachemulti.NewStore(rs.db, cachedStores, rs.keysByName, rs.traceWriter, rs.traceContext), nil
 }
 
+// IsPresent() checks whether the store corresponding to
+// a particular key present in the Db.
+func (rs *Store) IsPresent(key string) bool {
+
+	ver := getLatestVersion(rs.db)
+	cInfo, err := getCommitInfo(rs.db, ver)
+	if err != nil {
+		return false
+	}
+
+	//Iterate the cInfo
+	for _, storeInfo := range cInfo.StoreInfos {
+		if storeInfo.Name == key {
+			return true
+		}
+	}
+
+	return false
+}
+
 // Implements MultiStore.
 // If the store does not exist, panics.
 func (rs *Store) GetStore(key types.StoreKey) types.Store {
