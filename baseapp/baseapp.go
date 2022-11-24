@@ -297,6 +297,9 @@ func (app *BaseApp) QueryRouter() sdk.QueryRouter { return app.queryRouter }
 // Seal seals a BaseApp. It prohibits any further modifications to a BaseApp.
 func (app *BaseApp) Seal() { app.sealed = true }
 
+// UnSeal unseals a BaseApp.
+func (app *BaseApp) UnSeal() { app.sealed = false }
+
 // IsSealed returns true if the BaseApp is sealed and false otherwise.
 func (app *BaseApp) IsSealed() bool { return app.sealed }
 
