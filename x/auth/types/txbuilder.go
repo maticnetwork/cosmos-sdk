@@ -63,7 +63,7 @@ func NewTxBuilderFromCLI() TxBuilder {
 		gas:                flags.GasFlagVar.Gas,
 		gasAdjustment:      viper.GetFloat64(flags.FlagGasAdjustment),
 		simulateAndExecute: flags.GasFlagVar.Simulate,
-		chainID:            viper.GetString(flags.FlagChainID),
+		chainID:            viper.GetString(flags.FlagChain),
 		memo:               viper.GetString(flags.FlagMemo),
 	}
 

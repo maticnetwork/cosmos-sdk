@@ -14,7 +14,7 @@ REST 서버를 가동하기 위해서는 다음과 같은 파라미터 값을 �
 예를 들어::
 
 ```bash
-gaiacli rest-server --chain-id=test \
+gaiacli rest-server --chain=test \
     --laddr=tcp://localhost:1317 \
     --node tcp://localhost:26657 \
     --trust-node=false
