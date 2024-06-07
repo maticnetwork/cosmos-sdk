@@ -30,7 +30,7 @@ const (
 	BroadcastAsync         = flags.BroadcastAsync
 	FlagHome               = flags.FlagHome
 	FlagUseLedger          = flags.FlagUseLedger
-	FlagChainID            = flags.FlagChainID
+	FlagChain              = flags.FlagChain
 	FlagNode               = flags.FlagNode
 	FlagHeight             = flags.FlagHeight
 	FlagGasAdjustment      = flags.FlagGasAdjustment

@@ -64,7 +64,7 @@ Here is the command to send coins via the CLI:
 
 ```bash
 gaiacli tx send <from_key_or_address> <to_address> <amount> \
-    --chain-id=<name_of_testnet_chain> 
+    --chain=<name_of_testnet_chain> 
 ```
 
 Parameters:

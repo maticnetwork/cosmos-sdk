@@ -12,7 +12,7 @@ def init_default_argument_parser(prog_desc, default_chain_id, default_start_time
         help='exported genesis.json file',
         type=argparse.FileType('r'), default=sys.stdin,
     )
-    parser.add_argument('--chain-id', type=str, default=default_chain_id)
+    parser.add_argument('--chain', type=str, default=default_chain_id)
     parser.add_argument('--start-time', type=str, default=default_start_time)
     return parser
 
