@@ -64,7 +64,7 @@ gaiacli account <YOUR_ADDRESS>
 
 ```bash
 gaiacli tx send <from_key_or_address> <to_address> <amount> \
-    --chain=<name_of_testnet_chain> 
+    --chain-id=<name_of_testnet_chain> 
 ```
 
 参数：

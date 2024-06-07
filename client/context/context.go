@@ -115,13 +115,13 @@ func createVerifier() tmlite.Verifier {
 		return nil
 	}
 
-	chainID := viper.GetString(flags.FlagChain)
+	chainID := viper.GetString(flags.FlagChainID)
 	home := viper.GetString(flags.FlagHome)
 	nodeURI := viper.GetString(flags.FlagNode)
 
 	var errMsg bytes.Buffer
 	if chainID == "" {
-		errMsg.WriteString("--chain ")
+		errMsg.WriteString("--chain-id ")
 	}
 	if home == "" {
 		errMsg.WriteString("--home ")

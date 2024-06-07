@@ -69,7 +69,7 @@ func InitCmd(ctx *server.Context, cdc *codec.Codec, mbm module.BasicManager,
 			config := ctx.Config
 			config.SetRoot(viper.GetString(cli.HomeFlag))
 
-			chainID := viper.GetString(client.FlagChain)
+			chainID := viper.GetString(client.FlagChainID)
 			if chainID == "" {
 				chainID = fmt.Sprintf("test-chain-%v", common.RandStr(6))
 			}
@@ -118,7 +118,7 @@ func InitCmd(ctx *server.Context, cdc *codec.Codec, mbm module.BasicManager,
 
 	cmd.Flags().String(cli.HomeFlag, defaultNodeHome, "node's home directory")
 	cmd.Flags().BoolP(flagOverwrite, "o", false, "overwrite the genesis.json file")
-	cmd.Flags().String(client.FlagChain, "", "genesis file chain, if left blank will be randomly created")
+	cmd.Flags().String(client.FlagChainID, "", "genesis file chain-id, if left blank will be randomly created")
 
 	return cmd
 }
