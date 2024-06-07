@@ -66,7 +66,7 @@ func (rs *RestServer) Start(listenAddr string, maxOpen int, readTimeout, writeTi
 	rs.log.Info(
 		fmt.Sprintf(
 			"Starting application REST service (chain-id: %q)...",
-			viper.GetString(flags.FlagChainID),
+			viper.GetString(flags.FlagChain),
 		),
 	)
 

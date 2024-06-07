@@ -286,7 +286,7 @@ func CreateValidatorMsgHelpers(ipDefault string) (fs *flag.FlagSet, nodeIDFlag, 
 
 // prepare flags in config
 func PrepareFlagsForTxCreateValidator(
-	config *cfg.Config, nodeID, chainID string, valPubKey crypto.PubKey,
+	config *cfg.Config, nodeID, chain string, valPubKey crypto.PubKey,
 ) {
 
 	ip := viper.GetString(FlagIP)
@@ -299,7 +299,7 @@ func PrepareFlagsForTxCreateValidator(
 	details := viper.GetString(FlagDetails)
 	identity := viper.GetString(FlagIdentity)
 
-	viper.Set(client.FlagChainID, chainID)
+	viper.Set(client.FlagChain, chain)
 	viper.Set(client.FlagFrom, viper.GetString(client.FlagName))
 	viper.Set(FlagNodeID, nodeID)
 	viper.Set(FlagIP, ip)
