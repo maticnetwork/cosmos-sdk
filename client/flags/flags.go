@@ -32,7 +32,7 @@ const (
 
 	FlagHome               = tmcli.HomeFlag
 	FlagUseLedger          = "ledger"
-	FlagChain              = "chain"
+	FlagChainID            = "chain-id"
 	FlagNode               = "node"
 	FlagHeight             = "height"
 	FlagGasAdjustment      = "gas-adjustment"
@@ -76,7 +76,7 @@ func GetCommands(cmds ...*cobra.Command) []*cobra.Command {
 		viper.BindPFlag(FlagUseLedger, c.Flags().Lookup(FlagUseLedger))
 		viper.BindPFlag(FlagNode, c.Flags().Lookup(FlagNode))
 
-		c.MarkFlagRequired(FlagChain)
+		c.MarkFlagRequired(FlagChainID)
 	}
 	return cmds
 }
@@ -110,7 +110,7 @@ func PostCommands(cmds ...*cobra.Command) []*cobra.Command {
 		viper.BindPFlag(FlagUseLedger, c.Flags().Lookup(FlagUseLedger))
 		viper.BindPFlag(FlagNode, c.Flags().Lookup(FlagNode))
 
-		c.MarkFlagRequired(FlagChain)
+		c.MarkFlagRequired(FlagChainID)
 	}
 	return cmds
 }
