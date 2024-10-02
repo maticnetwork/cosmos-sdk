@@ -36,10 +36,6 @@ func (l MockLogger) Info(msg string, kvs ...interface{}) {
 	*l.logs = append(*l.logs, msg)
 }
 
-func (l MockLogger) Warn(msg string, kvs ...interface{}) {
-	*l.logs = append(*l.logs, msg)
-}
-
 func (l MockLogger) Error(msg string, kvs ...interface{}) {
 	*l.logs = append(*l.logs, msg)
 }

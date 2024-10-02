@@ -42,8 +42,6 @@ func initFundraiserTestVectors(t *testing.T) []addrData {
 }
 
 func TestFundraiserCompatibility(t *testing.T) {
-	t.Skip("not relevant for this project")
-
 	hdToAddrTable := initFundraiserTestVectors(t)
 
 	for i, d := range hdToAddrTable {
