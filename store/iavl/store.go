@@ -111,6 +111,15 @@ func (st *Store) DeleteVersions(versions ...int64) error {
 	return nil
 }
 
+// LoadVersionForOverwriting deletes data from targetVersion + 1 onward
+func (st *Store) LoadVersionForOverwriting(targetVersion int64) (int64, error) {
+	mutTree, ok := st.tree.(*iavl.MutableTree)
+	if !ok {
+		return st.tree.Version(), fmt.Errorf("not of type mutable tree")
+	}
+	return mutTree.LoadVersionForOverwriting(targetVersion)
+}
+
 // Implements Committer.
 func (st *Store) Commit() types.CommitID {
 	// Save a new version.
