@@ -142,6 +142,11 @@ func (app *BaseApp) Logger() log.Logger {
 	return app.logger
 }
 
+// GetCommitMultiStore returns the underlying CommitMultiStore
+func (app *BaseApp) GetCommitMultiStore() sdk.CommitMultiStore {
+	return app.cms
+}
+
 // SetCommitMultiStoreTracer sets the store tracer on the BaseApp's underlying
 // CommitMultiStore.
 func (app *BaseApp) SetCommitMultiStoreTracer(w io.Writer) {
