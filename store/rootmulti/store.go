@@ -59,27 +59,23 @@ func NewStore(db dbm.DB) *Store {
 }
 
 // RollbackToVersion delete the versions after `target` and update the latest version.
-func (rs *Store) RollbackToVersion(target int64) error {
-	if target <= 0 {
-		return fmt.Errorf("invalid rollback height target: %d", target)
+func (rs *Store) RollbackToVersion(target int64) int64 {
+	if target < 0 {
+		panic("Negative rollback target")
 	}
-
-	for key, store := range rs.stores {
-		if store.GetStoreType() == types.StoreTypeIAVL {
-			// If the store is wrapped with an inter-block cache, we must first unwrap
-			// it to get the underlying IAVL store.
-			store = rs.GetCommitKVStore(key)
-			_, err := store.(*iavl.Store).LoadVersionForOverwriting(target)
-			if err != nil {
-				return err
-			}
-		}
+	current := getLatestVersion(rs.db)
+	if target >= current {
+		return current
 	}
+	for ; current > target; current-- {
+		rs.pruneHeights = append(rs.pruneHeights, current)
+	}
+	rs.pruneStores()
 
 	// update latest height
-	latestBytes, _ := cdc.MarshalBinaryLengthPrefixed(target)
+	latestBytes, _ := cdc.MarshalBinaryLengthPrefixed(current)
 	rs.db.Set([]byte(latestVersionKey), latestBytes)
-	return rs.LoadLatestVersion()
+	return current
 }
 
 // pruneStores will batch delete a list of heights from each mounted sub-store.
